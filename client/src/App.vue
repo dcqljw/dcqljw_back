@@ -1,5 +1,6 @@
 <template>
-    <div>建设中</div>
+    <h1>建设中.....</h1>
+<!--    <router-view></router-view>-->
 </template>
 
 <script>
