@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     get_title() {
-      axios.get("http://dcqljw.com:8000/home")
+      axios.get("https://dcqljw.xyz:8000/home/")
           .then(message => {
             this.title = message.data
           }).catch(res => {
