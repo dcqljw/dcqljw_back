@@ -13,6 +13,8 @@
   </div>
 </template>
 <script>
+import axios from "axios";
+
 const getUUID = () => Math.random() + Math.random();
 export default {
   name: 'App',
@@ -49,10 +51,26 @@ export default {
     removeBullet() {
       this.barrage_list.shift()
       console.log(this.barrage_list)
+    },
+    get_data() {
+      axios.get("https://dcqljw.xyz:8000/home")
+          .then(res => {
+            console.log(res)
+            for (let i = 0; i < res.data.length; i++) {
+              console.log(res.data[i])
+              const new_barrage = {
+                id: getUUID(),
+                text: res.data[i].title,
+                line: 0
+              }
+              this.waitBarrage.push(new_barrage)
+            }
+          })
     }
   },
   created() {
     this.showNextBarrage()
+    this.get_data()
     setInterval(this.showNextBarrage, 700)
   }
 }
