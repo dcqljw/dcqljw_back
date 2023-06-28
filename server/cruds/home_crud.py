@@ -13,4 +13,4 @@ def create_index(db: Session, index: schemas.IndexCreate):
 
 
 def get_index(db: Session):
-    return db.query(models.Index).order_by(-models.Index.id).first()
+    return db.query(models.Index).order_by(-models.Index.id).limit(4).all()

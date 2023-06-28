@@ -10,10 +10,10 @@ from fastapi.responses import JSONResponse
 router = APIRouter(prefix='/home')
 
 
-@router.get("/")
+@router.get("")
 def Index(db: Session = Depends(get_db)):
     index = home_crud.get_index(db)
-    return index.title
+    return index
 
 
 @router.post("/create_title")
