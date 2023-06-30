@@ -1,14 +1,10 @@
 import uvicorn
-from fastapi import FastAPI, HTTPException, status
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
-
-from models import models
-from database import engine
 from app.home import api as home_api
-from fastapi import Request
 
-models.Base.metadata.create_all(bind=engine)
+# 不需要创建数据库
+# models.Base.metadata.create_all(bind=engine)
 app = FastAPI(docs_url=None, redoc_url=None)
 
 app.add_middleware(

@@ -1,11 +1,12 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
+from typing import List
 
 from app import get_db
 from cruds import home_crud
 from schemas import schemas
 from fastapi import Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 
 router = APIRouter(prefix='/home')
 
@@ -26,3 +27,23 @@ def Index(request: Request, index: schemas.IndexCreate, db: Session = Depends(ge
         return {"msg": "ok"}
     else:
         return {"msg": "error"}
+
+
+@router.get("/hot_top", response_model=schemas.OutSpiderData)
+def get_hot_top(spider_type: str, db: Session = Depends(get_db)):
+    hot_top = home_crud.get_hot_top(db, spider_type)
+    print(hot_top)
+    if hot_top:
+        data = {
+            "code": "2000",
+            "data": hot_top,
+            "msg": "success"
+        }
+        return data
+    else:
+        data = {
+            "code": "2001",
+            "data": [],
+            "msg": "no data"
+        }
+        return data
