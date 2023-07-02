@@ -2,6 +2,7 @@ import {createRouter, createWebHashHistory} from 'vue-router'
 import IndexView from '../views/IndexView.vue'
 import FortuneTellerView from "@/views/FortuneTellerView.vue";
 import HotTopView from "@/views/HotTopView.vue";
+import DemoView from "@/views/DemoView.vue";
 
 const routes = [
     {
@@ -16,6 +17,10 @@ const routes = [
         path: "/hot_top",
         name: "HotTop",
         component: HotTopView
+    }, {
+        path: "/demo",
+        name: "demo",
+        component: DemoView
     }
 ]
 

@@ -110,7 +110,7 @@ export default {
 }
 
 .item {
-  animation: rightToleft 10s linear both infinite;
+  transition: rightToleft 10s linear;
 }
 
 .item[data-line='1'] {
