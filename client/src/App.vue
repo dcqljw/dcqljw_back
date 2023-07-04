@@ -34,8 +34,12 @@ export default {
 </script>
 
 <style>
-html, body {
+html {
   height: 100%;
+  margin: 0;
+}
+
+body {
   margin: 0;
 }
 
@@ -44,7 +48,7 @@ html, body {
 }
 
 ::-webkit-scrollbar-track {
- border-radius: 10px;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {

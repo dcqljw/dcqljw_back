@@ -1,12 +1,13 @@
 <template>
   <div id="barrage">
-    <div class="item" v-for="item in barrage_list" v-bind:key="item.id" v-bind:data-line="item.line"
-         @transitionend="removeBullet">
-      <div class="barrage_item">
-        <img :src="'https://api.multiavatar.com/'+item.id+'.png'">
-        <div class="barrage_text">{{ item.text }}</div>
+    <transition-group @after-enter="enter">
+      <div class="item" v-for="item in barrage_list" v-bind:key="item.id" v-bind:data-line="item.line">
+        <div class="barrage_item">
+          <img :src="'https://api.multiavatar.com/'+item.id+'.png'">
+          <div class="barrage_text">{{ item.text }}</div>
+        </div>
       </div>
-    </div>
+    </transition-group>
     <div class="send_barrage">
       <el-input v-model="send_text" placeholder="Please input" @keydown.enter="send_barrage"/>
     </div>
@@ -66,6 +67,10 @@ export default {
               this.waitBarrage.push(new_barrage)
             }
           })
+    },
+    enter() {
+      // this.barrage_list.shift()
+      console.log("enter")
     }
   },
   created() {
@@ -101,18 +106,6 @@ export default {
   height: 50px;
 }
 
-.item {
-  transform: translateX(-100%);
-}
-
-.item {
-  transform: translateX(100vw);
-}
-
-.item {
-  animation: rightToleft 10s linear both infinite;
-}
-
 .item[data-line='1'] {
   top: 50px;
 }
@@ -145,14 +138,23 @@ export default {
   top: 750px;
 }
 
+.item {
+  transform: translateX(-100%);
+}
+
 @keyframes rightToleft {
-  0% {
-    transform: translate(100vw);
+  from {
+    transform: translateX(100vh);
   }
-  100% {
-    transform: translate(-100%);
+  to {
+    transform: translateX(-100%);
   }
 }
+
+.v-enter-active {
+  animation: rightToleft 8s linear;
+}
+
 
 .barrage_text {
   display: flex;
@@ -164,6 +166,8 @@ export default {
 }
 
 .send_barrage {
-//height: 100px; //width: 100px; //border: 1px solid; bottom: 20px; position: absolute; right: 50px;
+  bottom: 20px;
+  position: absolute;
+  right: 50px;
 }
 </style>
