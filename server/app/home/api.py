@@ -32,7 +32,6 @@ def Index(request: Request, index: schemas.IndexCreate, db: Session = Depends(ge
 @router.get("/hot_top", response_model=schemas.OutSpiderData)
 def get_hot_top(spider_type: str, db: Session = Depends(get_db)):
     hot_top = home_crud.get_hot_top(db, spider_type)
-    print(hot_top)
     if hot_top:
         data = {
             "code": "2000",
