@@ -168,61 +168,65 @@ export default {
     }
   },
   methods: {
-    get_data() {
-      axios.get("https://dcqljw.xyz:8000/home/hot_top?spider_type=weibo").then(res => {
-        for (let i = 0; i < res.data.data.length; i++) {
-          this.weibo_list.push({idx: i, item: res.data.data[i]})
-          this.weibo_time = res.data.data[i]['crawl_time'].replace("T", " ")
-        }
-        this.skeleton = false
-        console.log(this.weibo_list)
-      }).catch(res => {
-        console.log(res.message)
+
+    send_data(spider_type) {
+      return axios.get("home/hot_top?spider_type=" + spider_type).catch(() => {
       })
-      axios.get("https://dcqljw.xyz:8000/home/hot_top?spider_type=baidu").then(res => {
-        for (let i = 0; i < res.data.data.length; i++) {
-          this.baidu_list.push({idx: i, item: res.data.data[i]})
-          this.baidu_time = res.data.data[i]['crawl_time'].replace("T", " ")
-        }
-        this.skeleton = false
-      }).catch(res => {
-        console.log(res.message)
+    },
+    get_datas() {
+      const _this = this
+      axios.all([
+        _this.send_data("weibo"),
+        _this.send_data("douyin"),
+        _this.send_data("baidu"),
+        _this.send_data("bilibili"),
+        _this.send_data("toutiao")])
+          .then(axios.spread(function (res1, res2, res3, res4, res5) {
+                for (let i = 0; i < res1.data.data.length; i++) {
+                  _this.weibo_list.push({idx: i, item: res1.data.data[i]})
+                  _this.weibo_time = res1.data.data[i]['crawl_time'].replace("T", " ")
+                }
+                for (let i = 0; i < res2.data.data.length; i++) {
+                  _this.douyin_list.push({idx: i, item: res2.data.data[i]})
+                  _this.douyin_time = res2.data.data[i]['crawl_time'].replace("T", " ")
+                }
+                for (let i = 0; i < res3.data.data.length; i++) {
+                  _this.baidu_list.push({idx: i, item: res3.data.data[i]})
+                  _this.baidu_time = res3.data.data[i]['crawl_time'].replace("T", " ")
+                }
+                for (let i = 0; i < res4.data.data.length; i++) {
+                  _this.bilibili_list.push({idx: i, item: res4.data.data[i]})
+                  _this.bilibili_time = res4.data.data[i]['crawl_time'].replace("T", " ")
+                }
+                for (let i = 0; i < res5.data.data.length; i++) {
+                  _this.toutiao_list.push({idx: i, item: res5.data.data[i]})
+                  _this.toutiao_time = res5.data.data[i]['crawl_time'].replace("T", " ")
+                }
+                _this.skeleton = false
+              })
+          ).catch(error => {
+        return error
       })
-      axios.get("https://dcqljw.xyz:8000/home/hot_top?spider_type=douyin").then(res => {
-        for (let i = 0; i < res.data.data.length; i++) {
-          this.douyin_list.push({idx: i, item: res.data.data[i]})
-          this.douyin_time = res.data.data[i]['crawl_time'].replace("T", " ")
-        }
-        this.skeleton = false
-      }).catch(res => {
-        console.log(res.message)
-      })
-      axios.get("https://dcqljw.xyz:8000/home/hot_top?spider_type=bilibili").then(res => {
-        for (let i = 0; i < res.data.data.length; i++) {
-          this.bilibili_list.push({idx: i, item: res.data.data[i]})
-          this.bilibili_time = res.data.data[i]['crawl_time'].replace("T", " ")
-        }
-        this.skeleton = false
-      }).catch(res => {
-        console.log(res.message)
-      })
-      axios.get("https://dcqljw.xyz:8000/home/hot_top?spider_type=toutiao").then(res => {
-        for (let i = 0; i < res.data.data.length; i++) {
-          this.toutiao_list.push({idx: i, item: res.data.data[i]})
-          this.toutiao_time = res.data.data[i]['crawl_time'].replace("T", " ")
-        }
-        this.skeleton = false
-      }).catch(res => {
-        console.log(res.message)
-      })
-    }
+    },
   },
   created() {
-    this.get_data()
+    this.get_datas()
   }
 }
 </script>
 <style scoped>
+.no1 {
+  color: red;
+}
+
+.no2 {
+
+}
+
+.no3 {
+
+}
+
 .page_title {
   text-align: center;
 }
@@ -235,7 +239,7 @@ export default {
 }
 
 .time_show {
-  font-size: 3px;
+  font-size: 10px;
   position: absolute;
   top: -10px;
   right: -14px;

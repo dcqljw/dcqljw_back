@@ -1,5 +1,8 @@
 <template>
-  <div id="barrage">
+  <div class="hot_top">
+    <el-button type="primary" size="large" @click="this.$router.push('hot_top')">热榜</el-button>
+  </div>
+  <div id="barrage" v-show="false">
     <transition-group @after-enter="enter">
       <div class="item" v-for="item in barrage_list" v-bind:key="item.id" v-bind:data-line="item.line">
         <div class="barrage_item">
@@ -81,6 +84,11 @@ export default {
 }
 </script>
 <style scoped>
+.hot_top{
+  width: 100px;
+  margin: 0 auto;
+  text-align: center;
+}
 #barrage {
   width: 100%;
   height: 100%;
