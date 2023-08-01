@@ -14,7 +14,7 @@ module.exports = {
                 // 是否启用控制流扁平化(降低1.5倍的运行速度)
                 controlFlowFlattening: false,
                 // 随机的死代码块(增加了混淆代码的大小)
-                deadCodeInjection: true,
+                deadCodeInjection: false,
                 // 此选项几乎不可能使用开发者工具的控制台选项卡
                 debugProtection: false,
                 // 如果选中，则会在“控制台”选项卡上使用间隔强制调试模式，从而更难使用“开发人员工具”的其他功能。
@@ -30,7 +30,7 @@ module.exports = {
                 // 混淆后的代码,不能使用代码美化,同时需要配置 cpmpat:true;
                 // selfDefending: true,
                 // 删除字符串文字并将它们放在一个特殊的数组中
-                stringArray: true,
+                stringArray: false,
                 //这里是网上复制来的代码改的，不然会报错，具体报错看下面的贴的！！！！！！！！！！！！！！！！！！！
                 // stringArrayEncoding: false,
                 //stringArrayEncoding: ['base64'],

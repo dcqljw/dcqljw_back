@@ -3,24 +3,30 @@
     <h1 class="page_title">全网热搜</h1>
   </div>
   <div class="HotTopMain">
-    <el-card class="hot-top-card" body-style="height:500px;overflow: auto;padding: 10px 2px;">
+    <el-card class="hot-top-card" body-style="height:500px;overflow: auto;padding: 10px 2px;"
+             v-for="(hot,key) in hot_top"
+             :key="key.id">
       <template #header>
         <div class="card-header" style="position: relative">
-          <span>微博</span>
-          <span class="time_show">{{ weibo_time }}</span>
-          <span class="source_link"><a href="https://weibo.com" target="_blank">数据来源:https://weibo.com</a></span>
+          <span>
+            <el-image style="width: 30px;" :src="hot_config[key]['icon']"/>
+          </span>
+          <span class="time_show">{{ hot[0]['crawl_time'].substr(11) }}</span>
+          <span class="source_link"><a :href="hot_config[key]['source_href']"
+                                       target="_blank">数据来源{{ hot_config[key]['source_href'] }}</a></span>
         </div>
       </template>
-      <el-skeleton :loading="skeleton" animated>
+      <!--      <el-skeleton :loading="skeleton" animated>-->
+      <el-skeleton :loading="false" animated>
         <template #default>
           <div class="item_body">
-            <div v-for="item in weibo_list" :key="item" class="item">
-              <div class="item_idx">
-                {{ item['idx'] + 1 }}
+            <div v-for="(item,index) in hot" :key="item" class="item">
+              <div :class="'item_idx no'+(index + 1)">
+                {{ index + 1 }}
               </div>
-              <el-link :href="'https://s.weibo.com/weibo?q=%23'+item['item']['note'] + '%23'" target="_blank"
+              <el-link :href="hot_config[key]['hot_link'].replace('{note}',item['note'])" target="_blank"
                        class="item_link">
-                {{ item['item']['note'] }}
+                {{ item['note'] }}
               </el-link>
             </div>
           </div>
@@ -31,120 +37,6 @@
         </template>
       </el-skeleton>
 
-    </el-card>
-    <el-card class="hot-top-card" body-style="height:500px;overflow: auto;padding: 10px 2px;">
-      <template #header>
-        <div class="card-header" style="position: relative">
-          <span>百度</span>
-          <span class="time_show">{{ baidu_time }}</span>
-          <span class="source_link"><a href="https://baidu.com" target="_blank">数据来源:https://baidu.com</a></span>
-        </div>
-      </template>
-      <el-skeleton :loading="skeleton" animated>
-        <template #default>
-          <div class="item_body">
-            <div v-for="item in baidu_list" :key="item" class="item">
-              <div class="item_idx">
-                {{ item['idx'] + 1 }}
-              </div>
-              <el-link :href="'https://www.baidu.com/s?wd='+item['item']['note'] + '%23'" target="_blank"
-                       class="item_link">
-                {{ item['item']['note'] }}
-              </el-link>
-            </div>
-          </div>
-        </template>
-        <template #template>
-          <el-skeleton-item variant="text" style="width: 100%;height: 30px;margin: 10px 0"
-                            v-for="i in [1,2,3,4,5,6,7,8,9]" :key="i"/>
-        </template>
-      </el-skeleton>
-    </el-card>
-    <el-card class="hot-top-card" body-style="height:500px;overflow: auto;padding: 10px 2px;">
-      <template #header>
-        <div class="card-header" style="position: relative">
-          <span>抖音</span>
-          <span class="time_show">{{ douyin_time }}</span>
-          <span class="source_link"><a href="https://douyin.com" target="_blank">数据来源:https://douyin.com</a></span>
-        </div>
-      </template>
-      <el-skeleton :loading="skeleton" animated>
-        <template #default>
-          <div class="item_body">
-            <div v-for="item in douyin_list" :key="item" class="item">
-              <div class="item_idx">
-                {{ item['idx'] + 1 }}
-              </div>
-              <el-link :href="'https://www.douyin.com/search/'+item['item']['note']" target="_blank"
-                       class="item_link">
-                {{ item['item']['note'] }}
-              </el-link>
-            </div>
-          </div>
-        </template>
-        <template #template>
-          <el-skeleton-item variant="text" style="width: 100%;height: 30px;margin: 10px 0"
-                            v-for="i in [1,2,3,4,5,6,7,8,9]" :key="i"/>
-        </template>
-      </el-skeleton>
-    </el-card>
-    <el-card class="hot-top-card" body-style="height:500px;overflow: auto;padding: 10px 2px;">
-      <template #header>
-        <div class="card-header" style="position: relative">
-          <span>哔哩哔哩</span>
-          <span class="time_show">{{ bilibili_time }}</span>
-          <span class="source_link"><a href="https://bilibili.com"
-                                       target="_blank">数据来源:https://bilibili.com</a></span>
-        </div>
-      </template>
-      <el-skeleton :loading="skeleton" animated>
-        <template #default>
-          <div class="item_body">
-            <div v-for="item in bilibili_list" :key="item" class="item">
-              <div class="item_idx">
-                {{ item['idx'] + 1 }}
-              </div>
-              <el-link :href="'https://search.bilibili.com/all?keyword='+item['item']['note']" target="_blank"
-                       class="item_link">
-                {{ item['item']['note'] }}
-              </el-link>
-            </div>
-          </div>
-        </template>
-        <template #template>
-          <el-skeleton-item variant="text" style="width: 100%;height: 30px;margin: 10px 0"
-                            v-for="i in [1,2,3,4,5,6,7,8,9]" :key="i"/>
-        </template>
-      </el-skeleton>
-    </el-card>
-    <el-card class="hot-top-card" body-style="height:500px;overflow: auto;padding: 10px 2px;">
-      <template #header>
-        <div class="card-header" style="position: relative">
-          <span>今日头条</span>
-          <span class="time_show">{{ toutiao_time }}</span>
-          <span class="source_link"><a href="https://toutiao.com"
-                                       target="_blank">数据来源:https://toutiao.com</a></span>
-        </div>
-      </template>
-      <el-skeleton :loading="skeleton" animated>
-        <template #default>
-          <div class="item_body">
-            <div v-for="item in toutiao_list" :key="item" class="item">
-              <div class="item_idx">
-                {{ item['idx'] + 1 }}
-              </div>
-              <el-link :href="'https://so.toutiao.com/search?keyword='+item['item']['note']" target="_blank"
-                       class="item_link">
-                {{ item['item']['note'] }}
-              </el-link>
-            </div>
-          </div>
-        </template>
-        <template #template>
-          <el-skeleton-item variant="text" style="width: 100%;height: 30px;margin: 10px 0"
-                            v-for="i in [1,2,3,4,5,6,7,8,9]" :key="i"/>
-        </template>
-      </el-skeleton>
     </el-card>
   </div>
 </template>
@@ -154,58 +46,51 @@ import axios from "axios";
 export default {
   data() {
     return {
-      weibo_list: [],
-      weibo_time: "",
-      baidu_list: [],
-      baidu_time: "",
-      douyin_list: [],
-      douyin_time: "",
-      bilibili_list: [],
-      bilibili_time: "",
-      toutiao_list: [],
-      toutiao_time: "",
-      skeleton: true
+      hot_top: {},
+      hot_config: {
+        baidu: {
+          icon: "https://baidu.com/favicon.ico",
+          hot_link: "https://www.baidu.com/s?wd={note}",
+          source_href: "https://baidu.com/"
+        },
+        weibo: {
+          icon: "https://weibo.com/favicon.ico",
+          hot_link: "https://s.weibo.com/weibo?q=%23{note}%23",
+          source_href: "https://weibo.com/"
+        },
+        douyin: {
+          icon: "https://douyin.com/favicon.ico",
+          hot_link: "https://www.douyin.com/search/{note}",
+          source_href: "https://douyin.com/"
+        },
+        bilibili: {
+          icon: "https://bilibili.com/favicon.ico",
+          hot_link: "https://search.bilibili.com/all?keyword={note}",
+          source_href: "https://bilibili.com/"
+        },
+        toutiao: {
+          icon: "https://toutiao.com/favicon.ico",
+          hot_link: "https://so.toutiao.com/search?keyword={note}",
+          source_href: "https://toutiao.com/"
+        }
+      },
+      skeleton: false
     }
   },
   methods: {
-
-    send_data(spider_type) {
-      return axios.get("home/hot_top?spider_type=" + spider_type).catch(() => {
-      })
-    },
     get_datas() {
-      const _this = this
-      axios.all([
-        _this.send_data("weibo"),
-        _this.send_data("douyin"),
-        _this.send_data("baidu"),
-        _this.send_data("bilibili"),
-        _this.send_data("toutiao")])
-          .then(axios.spread(function (res1, res2, res3, res4, res5) {
-                for (let i = 0; i < res1.data.data.length; i++) {
-                  _this.weibo_list.push({idx: i, item: res1.data.data[i]})
-                  _this.weibo_time = res1.data.data[i]['crawl_time'].replace("T", " ")
-                }
-                for (let i = 0; i < res2.data.data.length; i++) {
-                  _this.douyin_list.push({idx: i, item: res2.data.data[i]})
-                  _this.douyin_time = res2.data.data[i]['crawl_time'].replace("T", " ")
-                }
-                for (let i = 0; i < res3.data.data.length; i++) {
-                  _this.baidu_list.push({idx: i, item: res3.data.data[i]})
-                  _this.baidu_time = res3.data.data[i]['crawl_time'].replace("T", " ")
-                }
-                for (let i = 0; i < res4.data.data.length; i++) {
-                  _this.bilibili_list.push({idx: i, item: res4.data.data[i]})
-                  _this.bilibili_time = res4.data.data[i]['crawl_time'].replace("T", " ")
-                }
-                for (let i = 0; i < res5.data.data.length; i++) {
-                  _this.toutiao_list.push({idx: i, item: res5.data.data[i]})
-                  _this.toutiao_time = res5.data.data[i]['crawl_time'].replace("T", " ")
-                }
-                _this.skeleton = false
-              })
-          ).catch(error => {
-        return error
+      axios.get(
+          'home/hot_top?spider_type_list=baidu_weibo_douyin_bilibili_toutiao'
+      ).then(res => {
+        console.log(res)
+        const data = res.data.data
+        for (const key in data) {
+          console.log(data[key])
+          this.hot_top[key] = data[key]
+        }
+        console.log(this.hot_top)
+      }).catch(() => {
+        this.$message.error("加载失败")
       })
     },
   },
@@ -216,15 +101,15 @@ export default {
 </script>
 <style scoped>
 .no1 {
-  color: red;
+  color: #FE2D46 !important;
 }
 
 .no2 {
-
+  color: #F60 !important;
 }
 
 .no3 {
-
+  color: #FAA90E !important;
 }
 
 .page_title {
@@ -235,6 +120,7 @@ export default {
   position: absolute;
   top: 17px;
   right: -12px;
+  font-size: 10px;
 
 }
 
