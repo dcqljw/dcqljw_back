@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List
+from typing import List, Dict
 
 from pydantic import BaseModel
 
@@ -38,8 +38,14 @@ class SpiderDataSchema(BaseModel):
         orm_mode = True
 
 
-class OutSpiderData(BaseModel):
+class OutSpiderDataV1(BaseModel):
     code: str
     data: List[SpiderDataSchema]
     msg: str
     speech: str = "hello world"
+
+
+class OutSpiderData(BaseModel):
+    code: str
+    data: Dict[str, List[SpiderDataSchema] | None]
+    msg: str
