@@ -2,6 +2,7 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.home import api as home_api
+from app.tasks import api as tasks_api
 
 # 不需要创建数据库
 # models.Base.metadata.create_all(bind=engine)
@@ -16,6 +17,7 @@ app.add_middleware(
 
 )
 app.include_router(home_api.router)
+app.include_router(tasks_api.router)
 
 
 @app.get("/")
