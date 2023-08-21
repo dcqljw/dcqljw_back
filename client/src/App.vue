@@ -25,10 +25,6 @@ export default {
     }
   },
   created() {
-    // this.get_title()
-    // setInterval(() => {
-    //   this.get_title()
-    // }, 30000)
   }
 }
 </script>
