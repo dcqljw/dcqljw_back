@@ -26,7 +26,7 @@ async def add_job(request: Request, task_name: str):
     if dcq != "5d9c9e023a33a510e7382393e7286d59":
         return JSONResponse(status_code=404, content={"msg": "error"})
     await test_task("")
-    scheduler.add_job(test_task, "interval", hours=1, id=task_name, args=[task_name])
+    scheduler.add_job(test_task, "interval", minutes=30, id=task_name, args=[task_name])
     return {"msg": "添加成功"}
 
 
