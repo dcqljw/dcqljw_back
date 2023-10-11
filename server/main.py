@@ -25,8 +25,8 @@ app.include_router(groups_api.router)
 
 
 @app.get("/")
-def read_root():
-    return {"code": "200"}
+def read_root(data):
+    return {"code": "200", "data": data}
 
 
 if __name__ == '__main__':

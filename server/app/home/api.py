@@ -1,15 +1,13 @@
-from typing import List
-
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
+
 from app import get_db
 from cruds import home_crud
 
 from schemas import schemas
 from fastapi import Request
-from fastapi.responses import JSONResponse, RedirectResponse
+from fastapi.responses import JSONResponse
 from utils.spiders import baiduSpider
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 router = APIRouter(prefix='/home')
 
@@ -21,7 +19,7 @@ def Index(db: Session = Depends(get_db)):
 
 
 @router.post("/create_title")
-def Index(request: Request, index: schemas.IndexCreate, db: Session = Depends(get_db)):
+async def Index(request: Request, index: schemas.IndexCreate, db: Session = Depends(get_db)):
     dcq = request.headers.get('dcq', None)
     if dcq != "5d9c9e023a33a510e7382393e7286d59":
         return JSONResponse(status_code=404, content={"msg": "error"})

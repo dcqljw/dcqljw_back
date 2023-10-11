@@ -2,7 +2,6 @@ from typing import List
 
 from sqlalchemy import desc
 from sqlalchemy.orm import Session, defer
-
 from models import models
 from schemas import schemas
 

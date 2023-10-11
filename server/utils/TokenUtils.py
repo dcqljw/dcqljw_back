@@ -31,7 +31,7 @@ def verify_token(token: str):
     try:
         decode = jwt.decode(token, Config.SECRET_KEY)
         return decode
-    except JWTError:
+    except Exception:
         return None
 
 
@@ -44,4 +44,4 @@ if __name__ == '__main__':
     }
     print(create_token(data))
     print(verify_token(create_token(data)))
-    print(verify_token("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRjcSIsInRpbWUiOiIyMDIzLTA5LTIxIDE5OjUzOjEyLjc0OTcyNCJ9.AJn9YufKCEK12qaM20smZF54i3y-0orY89rQDb0VtVo"))
+    print(verify_token("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRjcSIsInV1aWQiOiJjMzgzNmFkNDcyOWIzNWE3YmFkNjQ5YmQ5OGVkNzQ2NiIsInRpbWUiOiIyMDIzLTEwLTEyIDEwOjUwOjUwLjA1NzA3MSJ9.QVbUXJq09wBqDX790Gl_8X3Reusd_rvqSfIQFRFX2kc"))
