@@ -5,7 +5,7 @@ export default {
     return {
       learnGroupList: [
         {
-          id: "1",
+          id: "9358c5d100f85c1c5ef161571eaec056",
           title: "Learn-Duck建设组",
           description: "Learn-Duck建设小组",
           personNumber: 1,
@@ -58,7 +58,7 @@ export default {
                 </div>
                 <div class="group-item-content">
                   <div class="group-item-title">
-                    <el-link :underline="false" @click="this.$router.push('/group_detail/'+item.id+'/index')">
+                    <el-link :underline="false" @click="this.$router.push('/group_detail/'+item.id+'/groupIndex')">
                       {{ item.title }}
                     </el-link>
                     <el-tag v-for="tag in item.tag" :key="tag" size="small">{{ tag }}</el-tag>

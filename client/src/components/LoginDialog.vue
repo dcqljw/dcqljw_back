@@ -34,6 +34,7 @@ export default {
           this.$message.success("登录成功")
           this.isShow = false
           localStorage.setItem('userInfo', JSON.stringify(res.data.userInfo))
+          localStorage.setItem('token', res.data.token)
           location.reload()
         } else {
           this.$message.error(res.data.msg)

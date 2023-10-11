@@ -10,6 +10,7 @@ import GroupCalendarView from "@/views/GroupViews/CalendarView.vue";
 import GroupTodoView from "@/views/GroupViews/TodoView.vue";
 import GroupChatView from "@/views/GroupViews/ChatView.vue";
 import GroupNoteView from "@/views/GroupViews/NoteView.vue"
+import CreateGroupView from "@/views/CreateGroupView.vue";
 
 
 const routes = [
@@ -35,7 +36,7 @@ const routes = [
         component: GroupDetailView,
         children: [
             {
-                path: "index",
+                path: "groupIndex",
                 name: "groupIndex",
                 component: GroupIndexView
             }, {
@@ -60,6 +61,10 @@ const routes = [
                 component: GroupNoteView
             }
         ]
+    }, {
+        path: "/create_group",
+        name: "create_group",
+        component: CreateGroupView
     }
 ]
 

@@ -196,10 +196,13 @@ export default {
 }
 
 .operate {
-  width: 20px;
+  display: flex;
+  width: 30px;
   text-align: center;
-  height: 20px;
+  height: 30px;
   border-radius: 6px;
+  align-items: center;
+  justify-content: center;
 }
 
 .operate:hover {

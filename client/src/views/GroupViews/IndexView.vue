@@ -13,10 +13,10 @@ export default {
   },
   mounted() {
     let group_id = this.$route.params.id
-    axios.get("/group/" + group_id).then(res => {
+    axios.get("/group/get_group?gid=" + group_id).then(res => {
       console.log(res)
       if (res.data.code === "2000") {
-        this.groupInfo = res.data.groupInfo
+        this.groupInfo = res.data.data
       } else {
         this.$message.error(res.data.msg)
       }
@@ -44,79 +44,79 @@ export default {
           </div>
         </el-card>
       </div>
-      <div class="recommend-card">
-        <el-card>
-          <div class="card-title">推荐内容</div>
-          <div class="card-content">
-            <el-text>
-              空
-            </el-text>
-          </div>
-        </el-card>
-      </div>
-      <div class="users-card">
-        <el-card>
-          <div class="card-title">主要成员</div>
-          <div class="user-list">
-            <div class="user-item">
-              <el-avatar>DCQ</el-avatar>
-              <div class="user-info">
-                <div class="username">
-                  DCQ
-                  <el-tag type="danger" size="small">主管理</el-tag>
-                </div>
-                <el-text size="small" class="desc">我真的不想上班</el-text>
-              </div>
-            </div>
-            <el-divider/>
-            <div class="user-item">
-              <el-avatar>LJW</el-avatar>
-              <div class="user-info">
-                <div class="username">LJW
-                  <el-tag size="small">管理</el-tag>
-                </div>
-                <el-text size="small" class="desc">我真的不想上班</el-text>
-              </div>
-            </div>
-            <el-divider/>
-            <div class="user-item">
-              <el-avatar>LEARN</el-avatar>
-              <div class="user-info">
-                <div class="username">LEARN
-                  <el-tag size="small">管理</el-tag>
-                </div>
-                <el-text size="small" class="desc">我真的不想上班</el-text>
-              </div>
-            </div>
-            <el-divider/>
-            <div class="user-item">
-              <el-avatar>DUCK</el-avatar>
-              <div class="user-info">
-                <div class="username">DUCK
-                  <el-tag size="small">管理</el-tag>
-                </div>
-                <el-text size="small" class="desc">我真的不想上班</el-text>
-              </div>
-            </div>
-          </div>
-        </el-card>
-      </div>
-      <div class="chat-group">
-        <el-card>
-          <div class="card-title">公共聊天室</div>
-          <div class="user-list">
-            <div class="user-item">
-              <el-avatar>全体</el-avatar>
-              <div class="user-info">
-                <div class="username">
-                  全体成员
-                  <el-tag type="success" size="small">3人</el-tag>
-                </div>
-              </div>
-            </div>
-          </div>
-        </el-card>
-      </div>
+      <!--      <div class="recommend-card">-->
+      <!--        <el-card>-->
+      <!--          <div class="card-title">推荐内容</div>-->
+      <!--          <div class="card-content">-->
+      <!--            <el-text>-->
+      <!--              空-->
+      <!--            </el-text>-->
+      <!--          </div>-->
+      <!--        </el-card>-->
+      <!--      </div>-->
+      <!--      <div class="users-card">-->
+      <!--        <el-card>-->
+      <!--          <div class="card-title">主要成员</div>-->
+      <!--          <div class="user-list">-->
+      <!--            <div class="user-item">-->
+      <!--              <el-avatar>DCQ</el-avatar>-->
+      <!--              <div class="user-info">-->
+      <!--                <div class="username">-->
+      <!--                  DCQ-->
+      <!--                  <el-tag type="danger" size="small">主管理</el-tag>-->
+      <!--                </div>-->
+      <!--                <el-text size="small" class="desc">我真的不想上班</el-text>-->
+      <!--              </div>-->
+      <!--            </div>-->
+      <!--            <el-divider/>-->
+      <!--            <div class="user-item">-->
+      <!--              <el-avatar>LJW</el-avatar>-->
+      <!--              <div class="user-info">-->
+      <!--                <div class="username">LJW-->
+      <!--                  <el-tag size="small">管理</el-tag>-->
+      <!--                </div>-->
+      <!--                <el-text size="small" class="desc">我真的不想上班</el-text>-->
+      <!--              </div>-->
+      <!--            </div>-->
+      <!--            <el-divider/>-->
+      <!--            <div class="user-item">-->
+      <!--              <el-avatar>LEARN</el-avatar>-->
+      <!--              <div class="user-info">-->
+      <!--                <div class="username">LEARN-->
+      <!--                  <el-tag size="small">管理</el-tag>-->
+      <!--                </div>-->
+      <!--                <el-text size="small" class="desc">我真的不想上班</el-text>-->
+      <!--              </div>-->
+      <!--            </div>-->
+      <!--            <el-divider/>-->
+      <!--            <div class="user-item">-->
+      <!--              <el-avatar>DUCK</el-avatar>-->
+      <!--              <div class="user-info">-->
+      <!--                <div class="username">DUCK-->
+      <!--                  <el-tag size="small">管理</el-tag>-->
+      <!--                </div>-->
+      <!--                <el-text size="small" class="desc">我真的不想上班</el-text>-->
+      <!--              </div>-->
+      <!--            </div>-->
+      <!--          </div>-->
+      <!--        </el-card>-->
+      <!--      </div>-->
+      <!--      <div class="chat-group">-->
+      <!--        <el-card>-->
+      <!--          <div class="card-title">公共聊天室</div>-->
+      <!--          <div class="user-list">-->
+      <!--            <div class="user-item">-->
+      <!--              <el-avatar>全体</el-avatar>-->
+      <!--              <div class="user-info">-->
+      <!--                <div class="username">-->
+      <!--                  全体成员-->
+      <!--                  <el-tag type="success" size="small">3人</el-tag>-->
+      <!--                </div>-->
+      <!--              </div>-->
+      <!--            </div>-->
+      <!--          </div>-->
+      <!--        </el-card>-->
+      <!--      </div>-->
     </div>
   </div>
 </template>

@@ -51,7 +51,9 @@
             </div>
           </div>
           <div class="header-create hidden-md-and-down" v-if="isLogin">
-            <el-button class="create_group_button" type="primary" :icon="Plus">创建组</el-button>
+            <el-button class="create_group_button" type="primary" :icon="Plus"
+                       @click="this.$router.push('/create_group')">创建组
+            </el-button>
           </div>
           <div class="header-user">
             <el-popover :width="100" v-if="isLogin">
@@ -138,6 +140,7 @@ export default {
     }
   },
   created() {
+    document.cookie = "key=asdf;path=/;domain=baidu.com;max-age=session"
   },
   mounted() {
     if (localStorage.getItem("userInfo")) {
