@@ -83,8 +83,18 @@
     </el-row>
   </el-affix>
   <router-view></router-view>
+  <div class="bottom-menu hidden-lg-and-up">
+    <el-menu
+        default-active="1"
+        mode="horizontal" class="bottom-menu-m">
+      <el-menu-item index="1" @click="this.$router.push('/')">首页</el-menu-item>
+      <el-menu-item index="2" @click="this.$router.push('/learn_group')">学习组</el-menu-item>
+      <el-menu-item index="3" @click="this.$router.push('/my_learn')">我的组</el-menu-item>
+      <el-menu-item index="4" @click="this.$router.push('/moyu')">摸鱼</el-menu-item>
+    </el-menu>
+  </div>
   <LoginDialog ref="ShowLogin"></LoginDialog>
-  <el-backtop :right="100" :bottom="150"/>
+  <el-backtop class="hidden-sm-and-down" :right="100" :bottom="150"/>
 </template>
 
 <script>
@@ -141,11 +151,14 @@ export default {
   },
   created() {
     document.cookie = "key=asdf;path=/;domain=baidu.com;max-age=session"
+    console.log("未登录")
   },
   mounted() {
     if (localStorage.getItem("userInfo")) {
       this.isLogin = true
       this.userInfo = JSON.parse(localStorage.getItem("userInfo"))
+    } else {
+      console.log("未登录")
     }
   }
 }
@@ -258,5 +271,16 @@ body {
   display: flex;
   align-items: center;
   cursor: pointer;
+}
+
+.bottom-menu {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border-top: 1px solid var(--el-border-color)
+}
+
+.bottom-menu-m {
+  justify-content: space-evenly;
 }
 </style>

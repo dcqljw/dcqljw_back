@@ -1,6 +1,7 @@
 <script>
 import {Delete, Plus} from "@element-plus/icons-vue";
 import axios from "axios";
+import signOut from "../../plugins/utils"
 
 export default {
   name: "TodoView",
@@ -73,6 +74,9 @@ export default {
     }).then(res => {
       this.todoData["待执行"] = res.data
       console.log(this.todoData)
+    }).catch(res => {
+      console.log(res.response.data.detail)
+      this.$message.error(res.response.data.detail)
     })
     axios.get("/group/get_todos?group_id=" + group_id + "&todo_type=执行中", {
       headers: {
@@ -81,6 +85,10 @@ export default {
     }).then(res => {
       this.todoData["执行中"] = res.data
       console.log(this.todoData)
+    }).catch(res => {
+      console.log(res.response.data.detail)
+      this.$message.error(res.response.data.detail)
+      signOut(this)
     })
     axios.get("/group/get_todos?group_id=" + group_id + "&todo_type=已完成", {
       headers: {
@@ -89,6 +97,9 @@ export default {
     }).then(res => {
       this.todoData["已完成"] = res.data
       console.log(this.todoData)
+    }).catch(res => {
+      console.log(res.response.data.detail)
+      this.$message.error(res.response.data.detail)
     })
   }
 }
