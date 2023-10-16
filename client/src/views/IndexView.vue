@@ -177,6 +177,7 @@ export default {
 .content {
   width: 1200px;
   margin: 20px auto 0;
+  padding-bottom: 60px;
 }
 
 .article {

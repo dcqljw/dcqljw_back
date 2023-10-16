@@ -85,12 +85,32 @@
   <router-view></router-view>
   <div class="bottom-menu hidden-lg-and-up">
     <el-menu
-        default-active="1"
+        :default-active="this.$route.path"
         mode="horizontal" class="bottom-menu-m">
-      <el-menu-item index="1" @click="this.$router.push('/')">首页</el-menu-item>
-      <el-menu-item index="2" @click="this.$router.push('/learn_group')">学习组</el-menu-item>
-      <el-menu-item index="3" @click="this.$router.push('/my_learn')">我的组</el-menu-item>
-      <el-menu-item index="4" @click="this.$router.push('/moyu')">摸鱼</el-menu-item>
+      <el-menu-item index="/" @click="this.$router.push('/')">
+        <span class="item-menu">
+          <el-icon size="25">
+            <House/>
+          </el-icon>
+          <span>首页</span>
+        </span>
+      </el-menu-item>
+      <el-menu-item index="/learn_group" @click="this.$router.push('/learn_group')"><span class="item-menu">
+          <el-icon size="25"><ChatLineSquare/></el-icon>
+          <span>组别</span>
+        </span></el-menu-item>
+      <el-menu-item index="/my_learn" @click="this.$router.push('/my_learn')"><span class="item-menu">
+          <el-icon size="25">
+            <User/>
+          </el-icon>
+          <span>我的</span>
+        </span></el-menu-item>
+      <el-menu-item index="/moyu" @click="this.$router.push('/moyu')"><span class="item-menu">
+          <el-icon size="25">
+            <Coffee/>
+          </el-icon>
+          <span>摸鱼</span>
+        </span></el-menu-item>
     </el-menu>
   </div>
   <LoginDialog ref="ShowLogin"></LoginDialog>
@@ -99,12 +119,23 @@
 
 <script>
 
-import {Calendar, Hide, Message, Plus, Search, View} from "@element-plus/icons-vue";
+import {
+  Calendar,
+  ChatLineSquare,
+  Coffee,
+  Hide,
+  House,
+  Message,
+  Plus,
+  Search,
+  User,
+  View
+} from "@element-plus/icons-vue";
 import LoginDialog from "@/components/LoginDialog.vue";
 
 export default {
   name: 'App',
-  components: {Calendar, Message, LoginDialog},
+  components: {Coffee, User, ChatLineSquare, House, Calendar, Message, LoginDialog},
   computed: {
     Hide() {
       return Hide
@@ -282,5 +313,21 @@ body {
 
 .bottom-menu-m {
   justify-content: space-evenly;
+}
+
+.bottom-menu-m li {
+  line-height: 35px;
+}
+
+.item-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.item-menu i {
+  margin: 0 auto !important;
 }
 </style>
